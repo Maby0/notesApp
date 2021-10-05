@@ -9,4 +9,3 @@ it('is an instance of the Note class', () => {
 it('stores the text as a property within the note instance', () => {
   expect(note.text).toEqual("this is the text on the note.");
 })
-
