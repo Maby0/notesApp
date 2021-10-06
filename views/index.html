@@ -6,29 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src='../src/note.js'></script>
   <script src="../src/interface.js"></script>
+  <link rel="stylesheet" href="../styles/style.css">
   <title>Notes App</title>
 </head>
 <body>
-  <!-- <a href="#1">Note 1</a> |
-  <a href="#2">Note 2</a> |
-  <a href="#3">Note 3</a> |
-  <a href="#4">Note 4</a> -->
+  <div class="container1">
+    <nav>
+      <a href='index.html' data-link>All Notes</a>
+      <a href='/create-note' data-link>Create Note</a>
+      <a href='/view-note' data-link>Viewing Note</a>
+    </nav>
+    <a id="page-switch">link</a>
+    <ul id="note-list">
 
-  <nav>
-    <a href='index.html' data-link>All Notes</a>
-    <a href='/create-note' data-link>Create Note</a>
-    <a href='/view-note' data-link>Viewing Note</a>
-  </nav>
+    </ul>
 
-  <ul id="note-list">
-    
-  </ul>
-
-  <form id="new-note">
-    <textarea id="note-text" placeholder="Write your note here..."></textarea>
-    <input type="submit" value="Add note">
-  </form>
-
-  <div id="note-number"></div>
+    <form id="new-note">
+      <textarea id="note-text" placeholder="Write your note here..."></textarea>
+      <input type="submit" value="Add note">
+    </form>
+  </div>
+  <div class="container2">
+    the note that we clicked on
+  </div>
 </body>
 </html>
