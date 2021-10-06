@@ -30,16 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     saveNote(document.querySelector('#note-text').value);
   })
 
-  // document.querySelector('#page-switch').addEventListener('click', () => {
-  //   changePage();
-  // })
-
-
-
   function saveNote(noteText) {
     let note = new Note(noteText);
     notesArr.push(note);
-    displayNotes(notesArr);
+    displayNotes(note);
   }
 
   function displayNotes(notesArr) {
@@ -47,15 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
     li = document.createElement('li'),
     a = document.createElement('a');
 
-    notesArr.forEach((element) => {
-      a.textContent = element.abbreviate();
-      a.id = element.abbreviate();
-      a.addEventListener('click', () => {
-        viewWholeNote(element.getAllText());
-      })
-      li.appendChild(a);
-      list.appendChild(li);
-    });
+    // notesArr.forEach((element) => {
+    //   a.textContent = element.abbreviate();
+    //   // a.id = element.abbreviate();
+    //   a.href = '#'
+    //   a.addEventListener('click', () => {
+    //     viewWholeNote(element.getAllText());
+    //   })
+    //   li.appendChild(a);
+    //   list.appendChild(li);
+    // });
+
+    a.textContent = notesArr.abbreviate();
+    a.addEventListener('click', () => {
+      viewWholeNote(notesArr.getAllText());
+    })
+    li.appendChild(a);
+    list.appendChild(li);
 
     document.querySelector('#note-text').value = '';
   }
@@ -67,8 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
     container1.style.display = 'none';
     container2.style.display = 'block';
 
+    if (!!document.getElementById('long-note')) {
+      document.getElementById('long-note').remove();
+    } 
+       
     note = document.createElement('p');
     note.innerHTML = allText;
+    note.id = 'long-note';
     container2.appendChild(note);
+
+    document.querySelector('#back-button').addEventListener('click', () => {
+      container1.style.display = 'block';
+      container2.style.display = 'none';
+    })
   }
 })
