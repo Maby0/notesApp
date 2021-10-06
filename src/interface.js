@@ -34,13 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   changePage();
   // })
 
-  function changePage() {
-    let container1 = document.querySelector('.container1'),
-    container2 = document.querySelector('.container2');
 
-    container1.style.display = 'none';
-    container2.style.display = 'block';
-  }
 
   function saveNote(noteText) {
     let note = new Note(noteText);
@@ -57,12 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
       a.textContent = element.abbreviate();
       a.id = element.abbreviate();
       a.addEventListener('click', () => {
-        changePage();
+        viewWholeNote(element.getAllText());
       })
       li.appendChild(a);
       list.appendChild(li);
     });
 
     document.querySelector('#note-text').value = '';
+  }
+
+  function viewWholeNote(allText) {
+    let container1 = document.querySelector('.container1'),
+    container2 = document.querySelector('.container2');
+
+    container1.style.display = 'none';
+    container2.style.display = 'block';
+
+    note = document.createElement('p');
+    note.innerHTML = allText;
+    container2.appendChild(note);
   }
 })
