@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   localStorage.setItem('notes', JSON.stringify(notesArr));
 
-  listExistingNotes();
+  listExistingNotes(notesArr);
   
   newNote.addEventListener('submit', (p) => {
     p.preventDefault();
     emojify(document.querySelector('#note-text').value);
-    // saveNote(document.querySelector('#note-text').value);
   })
 
-  function listExistingNotes() {
-    if (notesArr.count > 0 ) {
+  function listExistingNotes(notesArr) {
+    if (notesArr.length > 0 ) {
       notesArr.forEach((note) => {
+        console.log(note)
         displayNotes(note);
       })
     }
@@ -27,14 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let emojifiedText,
     jsonString = JSON.parse(`{ "text": "${noteText}"}`);
 
-    console.log("reaches here.")
     fetch('https://makers-emojify.herokuapp.com/', { method: 'POST', headers: {'Content-Type': 'application/json',}, body: JSON.stringify(jsonString) })
       .then((response) => {
         return response.json()
       })
       .then((response) => {
         emojifiedText = response.emojified_text;
-        console.log("reaches here as well")
         saveNote(emojifiedText);
       })
   }
@@ -42,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function saveNote(noteText) {
     notesArr.push(noteText);
     localStorage.setItem('notes', JSON.stringify(notesArr))
-    let note = new Note(noteText);
     displayNotes(noteText);
   }
 
@@ -72,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     note = document.createElement('p');
     note.innerHTML = allText;
     note.id = 'long-note';
+    
     container2.appendChild(note);
 
     document.querySelector('#back-button').addEventListener('click', () => {
