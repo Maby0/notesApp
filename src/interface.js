@@ -1,71 +1,67 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//   makeUrlChangeShowNoteForCurrentPage();
-
-// const { NONAME } = require("dns");
-
-//   function makeUrlChangeShowNoteForCurrentPage() {
-//     window.addEventListener("hashchange", showNoteForCurrentPage);
-//   };
-
-//   function showNoteForCurrentPage() {
-//     showNote(getNoteFromUrl(window.location));
-//   };
-
-//   function getNoteFromUrl(location) {
-//     return location.hash.split("#")[1];
-//   };
-
-//   function showNote(note) {
-//     document
-//       .getElementById("note-number")
-//       .innerHTML = note;
-//   };
-// })
-
 document.addEventListener('DOMContentLoaded', () => {
-  let notesArr = [];
+  let notesArr = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [],
+    container1 = document.querySelector('.container1'),
+    container2 = document.querySelector('.container2'),
+    newNote = document.querySelector('#new-note'),
+    noteList = document.getElementById('note-list');
 
-  document.querySelector('#new-note').addEventListener('submit', (p) => {
+  localStorage.setItem('notes', JSON.stringify(notesArr));
+
+  listExistingNotes();
+  
+  newNote.addEventListener('submit', (p) => {
     p.preventDefault();
-    saveNote(document.querySelector('#note-text').value);
+    emojify(document.querySelector('#note-text').value);
+    // saveNote(document.querySelector('#note-text').value);
   })
 
-  function saveNote(noteText) {
-    let note = new Note(noteText);
-    notesArr.push(note);
-    displayNotes(note);
+  function listExistingNotes() {
+    if (notesArr.count > 0 ) {
+      notesArr.forEach((note) => {
+        displayNotes(note);
+      })
+    }
   }
 
-  function displayNotes(notesArr) {
-    let list = document.getElementById('note-list'),
-    li = document.createElement('li'),
-    a = document.createElement('a');
+  function emojify(noteText) {
+    let emojifiedText,
+    jsonString = JSON.parse(`{ "text": "${noteText}"}`);
 
-    // notesArr.forEach((element) => {
-    //   a.textContent = element.abbreviate();
-    //   // a.id = element.abbreviate();
-    //   a.href = '#'
-    //   a.addEventListener('click', () => {
-    //     viewWholeNote(element.getAllText());
-    //   })
-    //   li.appendChild(a);
-    //   list.appendChild(li);
-    // });
+    console.log("reaches here.")
+    fetch('https://makers-emojify.herokuapp.com/', { method: 'POST', headers: {'Content-Type': 'application/json',}, body: JSON.stringify(jsonString) })
+      .then((response) => {
+        return response.json()
+      })
+      .then((response) => {
+        emojifiedText = response.emojified_text;
+        console.log("reaches here as well")
+        saveNote(emojifiedText);
+      })
+  }
 
-    a.textContent = notesArr.abbreviate();
+  function saveNote(noteText) {
+    notesArr.push(noteText);
+    localStorage.setItem('notes', JSON.stringify(notesArr))
+    let note = new Note(noteText);
+    displayNotes(noteText);
+  }
+
+  function displayNotes(noteText) {
+    let li = document.createElement('li'),
+    a = document.createElement('a'),
+    note = new Note(noteText);
+
+    a.textContent = note.abbreviate();
     a.addEventListener('click', () => {
-      viewWholeNote(notesArr.getAllText());
+      viewWholeNote(note.getAllText());
     })
     li.appendChild(a);
-    list.appendChild(li);
+    noteList.appendChild(li);
 
     document.querySelector('#note-text').value = '';
   }
 
   function viewWholeNote(allText) {
-    let container1 = document.querySelector('.container1'),
-    container2 = document.querySelector('.container2');
-
     container1.style.display = 'none';
     container2.style.display = 'block';
 
