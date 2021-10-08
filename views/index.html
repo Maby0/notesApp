@@ -10,22 +10,30 @@
   <title>Notes App</title>
 </head>
 <body>
-  
-  <div class="container1" style="display: block;">
-    <h1>Notes</h1>
-    <ul id="note-list">
-    </ul>
-    <form id="new-note">
-      <textarea id="note-text" placeholder="Write your note here..."></textarea>
-      <input type="submit" value="Add note">
-    </form>
-  </div>
+  <main>
+    <section class="container1" style="display: block;">
+      <div class="list-page">
+        <div class="left-panel">
+          <h1>N.</h1>
+          <form id="new-note">
+            <textarea class='left-panel add-note-text' id="note-text" placeholder="Write your note here..."></textarea>
+            <input class='add-note-button' type="submit" value="Add note">
+          </form>
+        </div>
+        <div>
+          <ul id="note-list">
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  <div class="container2" style="display: none;">
-    <h2>Viewing note</h2>
-    <input id="back-button" type="submit" value="Back to note list">
-    <br>
-  </div>
-
+    <section class="container2" style="display: none;">
+      <div>
+        <h2>Viewing note</h2>
+        <input id="back-button" type="submit" value="Back to note list">
+        <br>
+      </div>
+  </section>
+  </main>
 </body>
 </html>
