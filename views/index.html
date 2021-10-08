@@ -10,30 +10,32 @@
   <title>Notes App</title>
 </head>
 <body>
-  <div class="container1">
-    <h1>Notes</h1>
-    <!-- <nav>
-      <a href='index.html' data-link>All Notes</a>
-      <a href='/create-note' data-link>Create Note</a>
-      <a href='/view-note' data-link>Viewing Note</a>
-    </nav> -->
-
-    <ul id="note-list">
-      
-
-    </ul>
-
-    <form id="new-note">
-      <div class = containerside>
-        <textarea id="note-text" placeholder="Write your note here..."></textarea>
-        <input class= "button1" type="submit" value="Add note">
+  <main>
+    <section class="container1" style="display: block;">
+      <div class="list-page">
+        <div class="left-panel">
+          <h1>N.</h1>
+          <form id="new-note">
+            <textarea class='left-panel add-note-text' id="note-text" placeholder="Write your note here..."></textarea>
+            <input class='add-note-button' type="submit" value="Add note">
+          </form>
+        </div>
+        <div>
+          <ul id="note-list">
+          </ul>
+        </div>
       </div>
-    </form>
-  </div>
-  <div class="container2">
-    <h2>Viewing note</h2>
-    <input id="back-button" type="submit" value="Back to note list">
-    <br>
-  </div>
+    </section>
+
+    <section class="container2" style="display: none;">
+      <div class="view-note">
+        <div class="left-panel">
+          <h1>N.</h1>
+          <input class ='add-note-button' id="back-button" type="submit" value="Back to note list">
+          <br>
+        </div>
+      </div>
+  </section>
+  </main>
 </body>
 </html>
