@@ -103,6 +103,7 @@ a {
   list-style: none;
   margin: 20px;
   background-color: #63B0CD;
+  border: 1px solid black;
 }
 
 .abbreviated-note :hover {
@@ -111,11 +112,16 @@ a {
 
 #long-note {
   grid-column: 2/2;
-
   box-shadow: 5px 5px 3px rgb(79 78 78 / 57%);
   border-radius: 5px;
-  height: 30px;
-  width: 150px;
+  height: fit-content;
+  width: 300px;
   margin: 20px;
   background-color: #63B0CD;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+#back-button {
+  margin-left: 7.5px;
 }
