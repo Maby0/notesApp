@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayNotes(noteText) {
     let li = document.createElement('li'),
     a = document.createElement('a'),
+    div = document.createElement('div'),
     note = new Note(noteText);
 
     a.textContent = note.abbreviate();
@@ -53,7 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
       viewWholeNote(note.getAllText());
     })
     li.appendChild(a);
-    noteList.appendChild(li);
+    div.appendChild(li);
+    div.className = 'abbreviated-note';
+    noteList.appendChild(div);
 
     document.querySelector('#note-text').value = '';
   }
@@ -66,11 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('long-note').remove();
     } 
        
+    oneNotePage = document.querySelector('.view-note')
     note = document.createElement('p');
     note.innerHTML = allText;
     note.id = 'long-note';
     
-    container2.appendChild(note);
+    oneNotePage.appendChild(note);
 
     document.querySelector('#back-button').addEventListener('click', () => {
       container1.style.display = 'block';
