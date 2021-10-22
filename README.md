@@ -8,6 +8,8 @@ Frontend single page note taking app written in pure JavaScript.
 - Notes will persist through a page refresh as they're being stored within the browser's local storage.
 - Note text accesses an emoji API to convert emoji syntax into their corresponding emoji.
 
+### Demo
+
 ![alt text](./images/noteappDemo.gif)
 
 
