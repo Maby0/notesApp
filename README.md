@@ -13,8 +13,11 @@ Frontend single page note taking app written in pure JavaScript.
 
 ### Progression and planning screencaps
 
+Testing framework in action:
 ![alt text](./images/testingFramework.png)
 
+Initial layout ideas:
 ![alt text](./images/notesPlan.png)
 
+Finalised design (built on figma):
 ![alt text](./images/notesPlan2.png)
